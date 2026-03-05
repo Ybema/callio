@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Callio — Opportunity & Proposal Intelligence</title>
+<meta name="description" content="Upload your funding call documents. Get structured proposal intelligence — in hours, not weeks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sv-blue:        #3382c1;
+  --sv-blue-dark:   #005ca2;
+  --sv-blue-deeper: #003f73;
+  --sv-green:       #72b5a1;
+  --sv-green-dark:  #4a9080;
+  --sv-blue-tint:   #eaf3f8;
+  --sv-green-tint:  #e8f5f1;
+
+  --dark:      #0b1929;
+  --gray-900:  #1e2d3d;
+  --gray-700:  #334155;
+  --gray-500:  #64748b;
+  --gray-300:  #cbd5e1;
+  --gray-100:  #f1f5f9;
+  --white:     #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--gray-900);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background: #fff;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ===================== NAV ===================== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11, 25, 41, 0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(51, 130, 193, 0.25);
+  padding: 0;
+}
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+.logo em {
+  font-style: normal;
+  color: var(--sv-green);
+}
+.nav-tag {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: none;
+}
+@media (min-width: 640px) { .nav-tag { display: block; } }
+.nav-cta {
+  display: none;
+  padding: 8px 18px;
+  background: var(--sv-blue);
+  color: var(--white);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--sv-blue-dark); }
+@media (min-width: 640px) { .nav-cta { display: block; } }
+
+/* ===================== HERO ===================== */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 0;
+}
+@media (min-width: 800px) {
+  .hero { grid-template-columns: 7fr 3fr; }
+}
+.hero-content {
+  background: linear-gradient(135deg, var(--dark) 0%, #0d2540 100%);
+  padding: 72px 40px 72px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 800px) {
+  .hero-content { padding: 80px 56px 80px 48px; }
+}
+@media (min-width: 1100px) {
+  .hero-content { padding: 88px 64px 88px calc((100vw - 1000px) / 2); }
+}
+.hero-image {
+  display: none;
+  background: url('assets/hero-bg.jpg') 25% center/cover no-repeat;
+  min-height: 320px;
+}
+@media (min-width: 800px) {
+  .hero-image { display: block; min-height: 480px; }
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(51,130,193,0.15);
+  border: 1px solid rgba(51,130,193,0.35);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9ecfec;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  align-self: flex-start;
+}
+.hero-eyebrow span {
+  width: 6px; height: 6px;
+  background: var(--sv-green);
+  border-radius: 50%;
+  display: inline-block;
+}
+.hero h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -2px;
+  line-height: 1.08;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--sv-green);
+}
+.hero-sub {
+  font-size: clamp(15px, 2vw, 17px);
+  color: rgba(255,255,255,0.62);
+  margin-top: 20px;
+  max-width: 520px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+.hero-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 520px;
+  margin: 32px 0 0;
+  text-align: left;
+}
+.hero-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.hero-step-num {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: var(--sv-blue);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: 2px;
+}
+.hero-step-text {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+.hero-step-text strong {
+  color: var(--white);
+  font-weight: 700;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  padding: 15px 34px;
+  background: var(--sv-blue);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid var(--sv-blue);
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  display: inline-block;
+}
+.btn-primary:hover {
+  background: var(--sv-blue-dark);
+  border-color: var(--sv-blue-dark);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  padding: 15px 28px;
+  color: rgba(255,255,255,0.75);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.45);
+  color: var(--white);
+}
+
+/* ===================== TWO PILLARS STRIP ===================== */
+.pillars {
+  background: var(--sv-blue);
+  padding: 0;
+}
+.pillar-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .pillar-grid { grid-template-columns: 1fr 1fr; } }
+.pillar {
+  padding: 36px 40px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+.pillar:first-child {
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+.pillar-num {
+  font-size: 48px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.12);
+  line-height: 1;
+  min-width: 48px;
+}
+.pillar-body h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.pillar-body p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.55;
+}
+
+/* ===================== PAIN ===================== */
+.pain-strip {
+  padding: 72px 0;
+  background: var(--gray-100);
+}
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sv-blue);
+  margin-bottom: 12px;
+}
+.section-heading {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.section-sub {
+  font-size: 17px;
+  color: var(--gray-500);
+  max-width: 580px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+.pain-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 640px) { .pain-grid { grid-template-columns: 1fr 1fr; } }
+.pain-card {
+  background: var(--white);
+  border: 1px solid #dde8f2;
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.pain-icon {
+  font-size: 22px;
+  min-width: 28px;
+  margin-top: 2px;
+}
+.pain-card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.pain-card p {
+  font-size: 13px;
+  color: var(--gray-500);
+  line-height: 1.55;
+}
+.pain-callout {
+  margin-top: 36px;
+  background: var(--dark);
+  border-radius: 14px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.pain-callout-icon {
+  font-size: 28px;
+  min-width: 32px;
+  margin-top: 2px;
+}
+.pain-callout p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.65;
+}
+.pain-callout strong { color: var(--sv-green); }
+
+/* ===================== CAPABILITIES ===================== */
+.capabilities {
+  padding: 80px 0;
+  background: var(--white);
+}
+.cap-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 640px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .cap-grid { grid-template-columns: repeat(4, 1fr); } }
+.cap-card {
+  border: 1px solid #dde8f0;
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.cap-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sv-blue), var(--sv-green));
+  border-radius: 16px 16px 0 0;
+}
+.cap-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 92, 162, 0.12);
+}
+.cap-icon {
+  font-size: 32px;
+  margin-bottom: 18px;
+  display: block;
+}
+.cap-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+.cap-card p {
+  font-size: 14px;
+  color: var(--gray-500);
+  line-height: 1.65;
+}
+.cap-intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+@media (min-width: 760px) {
+  .cap-intro { grid-template-columns: 1fr 1fr; gap: 48px; }
+}
+.cap-intro .section-sub { margin-bottom: 0; }
+.cap-intro-visual {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 60, 115, 0.12);
+}
+.cap-intro-visual img {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+}
+.cap-intro-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(51, 130, 193, 0.18);
+  pointer-events: none;
+}
+.caps-note {
+  margin-top: 32px;
+  border: 1px solid #cde8dc;
+  border-left: 4px solid var(--sv-green);
+  border-radius: 10px;
+  background: var(--sv-green-tint);
+  padding: 18px 22px;
+}
+.caps-note p {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.65;
+}
+
+/* ===================== WHY CALLIO ===================== */
+.why {
+  background: var(--dark);
+  padding: 80px 0;
+}
+.why .section-label { color: var(--sv-green); }
+.why .section-heading { color: var(--white); }
+.why .section-sub { color: rgba(255,255,255,0.55); }
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 640px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+.why-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 28px 24px;
+  transition: background 0.2s;
+}
+.why-card:hover { background: rgba(51,130,193,0.12); }
+.why-card-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(51,130,193,0.18);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+.why-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.why-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+}
+
+/* ===================== WAITLIST ===================== */
+.waitlist {
+  padding: 88px 0;
+  background: var(--sv-blue-tint);
+}
+.waitlist-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (min-width: 760px) { .waitlist-inner { grid-template-columns: 1fr 1fr; } }
+.waitlist-left .section-label { color: var(--sv-blue); }
+.waitlist-left .section-heading { color: var(--dark); }
+.waitlist-left .section-sub { color: var(--gray-500); margin-bottom: 24px; }
+.waitlist-benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.waitlist-benefit-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  background: var(--sv-green);
+  border-radius: 50%;
+  margin-top: 7px;
+}
+.waitlist-benefit p {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.55;
+}
+.waitlist-box {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 50px rgba(0, 92, 162, 0.13);
+}
+.waitlist-box h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+.waitlist-box .offer {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+.waitlist-box .offer strong { color: var(--sv-blue); }
+.form-group { margin-bottom: 14px; }
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 5px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 11px 14px;
+  font-size: 14px;
+  border: 1.5px solid var(--gray-300);
+  border-radius: 8px;
+  font-family: inherit;
+  color: var(--gray-900);
+  background: #fafcfe;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--sv-blue);
+  box-shadow: 0 0 0 3px rgba(51, 130, 193, 0.15);
+  background: #fff;
+}
+.form-group textarea { resize: vertical; min-height: 72px; }
+.form-group .optional { color: var(--gray-500); font-weight: 400; }
+.submit-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--sv-blue);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 6px;
+  letter-spacing: 0.1px;
+}
+.submit-btn:hover {
+  background: var(--sv-blue-dark);
+  transform: translateY(-1px);
+}
+.submit-btn:disabled { background: var(--gray-300); cursor: not-allowed; }
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 24px 0;
+}
+.form-success .check {
+  width: 56px; height: 56px;
+  background: var(--sv-green-tint);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 14px;
+  color: var(--sv-green-dark);
+}
+.form-success h3 { font-size: 19px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+.form-success p { font-size: 14px; color: var(--gray-500); }
+.form-error {
+  display: none;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  background: var(--dark);
+  padding: 28px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+footer p { font-size: 13px; color: rgba(255,255,255,0.38); }
+footer a { color: var(--sv-green); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="#" class="logo">Call<em>io</em></a>
+    <span class="nav-tag">Funding Call Discovery &amp; Proposal Intelligence</span>
+    <a href="#waitlist" class="nav-cta">Request Access</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span></span>AI-assisted proposal intelligence</div>
+    <h1>Turn funding calls into <em>winning proposals</em></h1>
+    <p class="hero-sub">From identifying the right opportunities to guiding your consortium through structured, iterative proposal development — all in one place.</p>
+    <div class="hero-steps">
+      <div class="hero-step">
+        <div class="hero-step-num">1</div>
+        <div class="hero-step-text"><strong>Upload</strong> your call documents, transcripts, and draft proposal</div>
+      </div>
+      <div class="hero-step">
+        <div class="hero-step-num">2</div>
+        <div class="hero-step-text"><strong>Receive</strong> a unified call summary, structured LFA, and dual-track review</div>
+      </div>
+      <div class="hero-step">
+        <div class="hero-step-num">3</div>
+        <div class="hero-step-text"><strong>Iterate</strong> with intelligent scoring, tracked feedback loops, and specific recommendations</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">Request Early Access</a>
+      <a href="#capabilities" class="btn-ghost">See how it works</a>
+    </div>
+  </div>
+  <div class="hero-image"></div>
+</section>
+
+<!-- TWO PILLARS -->
+<div class="pillars">
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-body">
+        <h3>Funding Call Discovery</h3>
+        <p>Monitor opportunities, match calls to your priorities, and receive timely notifications — so you never miss a relevant call.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-body">
+        <h3>Proposal Development Support</h3>
+        <p>Structured AI-assisted guidance across transcripts, source documents, idea generation, work-package iterations, and call alignment reviews.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain-strip">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <div class="section-heading">If you've written a consortium proposal,<br>you'll recognise this</div>
+    <div class="section-sub">These structural challenges appear in almost every Horizon proposal process — regardless of topic or consortium size.</div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">👥</div>
+        <div>
+          <h3>Small core team, hidden inconsistencies</h3>
+          <p>As more partners contribute, only a few people maintain the full structural picture — increasing the risk of gaps no one catches until review.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🧪</div>
+        <div>
+          <h3>Specialised input that's hard to assess</h3>
+          <p>Valuable partner content is added on request, but the core team lacks the subject expertise to align it with the overall proposal logic.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📑</div>
+        <div>
+          <h3>Parallel drafts circulating</h3>
+          <p>Multiple versions evolve simultaneously, making it unclear which logic is current and which changes have actually been incorporated.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⚖️</div>
+        <div>
+          <h3>Work packages evolving independently</h3>
+          <p>Different WP leads write at different levels of detail and interpretation — causing uneven structure and subtle misalignment across sections.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🕐</div>
+        <div>
+          <h3>Late budget changes cascade</h3>
+          <p>Near-submission adjustments force the team to realign text, tasks, and justifications under extreme time pressure — often incompletely.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🎯</div>
+        <div>
+          <h3>Call criteria assumed, not demonstrated</h3>
+          <p>Strong content is present, but alignment with evaluation criteria isn't explicitly visible for reviewers — costing points where it matters most.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pain-callout">
+      <div class="pain-callout-icon">⚠️</div>
+      <p>The proposal becomes <strong>structurally fragile</strong> — not because the idea is weak, but because <strong>complexity is no longer actively managed</strong>. Callio keeps the structure under control throughout the entire process.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="capabilities" id="capabilities">
+  <div class="container">
+    <div class="cap-intro">
+      <div>
+        <div class="section-label">What Callio Does</div>
+        <div class="section-heading">Not a one-shot tool.<br>A proposal development partner.</div>
+        <div class="section-sub">Callio works in iterations alongside your consortium. Each round builds on the last, keeping the entire team aligned.</div>
+      </div>
+      <div class="cap-intro-visual">
+        <img src="assets/callio-flow.png" alt="Funding documents and transcripts flowing through Callio into structured, aligned proposal outputs" loading="lazy">
+      </div>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <span class="cap-icon">📑</span>
+        <h3>Call Analysis</h3>
+        <p>Upload your funding call documents — Callio extracts every requirement, deadline, eligibility rule, and evaluation criterion into a structured summary your entire consortium can work from.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cap-icon">🎯</span>
+        <h3>Idea-to-Call Matching</h3>
+        <p>Bring your project idea or draft concept. Callio maps it against the call's priorities, identifies gaps in alignment, and highlights where your strengths match what the funder is looking for.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cap-icon">🧩</span>
+        <h3>Work Package Development</h3>
+        <p>Build and refine individual work packages with structural checks across the full set — ensuring consistent scope, realistic effort, logical dependencies, and alignment between WPs.</p>
+      </div>
+      <div class="cap-card">
+        <span class="cap-icon">📋</span>
+        <h3>Full Proposal Development</h3>
+        <p>Iterate on the complete proposal through multiple review rounds. Callio scores structure and call alignment independently, tracks what changed, and flags what still needs attention before submission.</p>
+      </div>
+    </div>
+    <div class="caps-note">
+      <p>💡 <strong>Consortium feedback loop:</strong> Callio tracks recommendations across iterations. When partners don't implement suggested changes, it flags the gap and asks why — so nothing falls through the cracks.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CALLIO -->
+<section class="why">
+  <div class="container">
+    <div class="section-label">Why Callio</div>
+    <div class="section-heading">Built differently from generic AI writing tools</div>
+    <div class="section-sub">Callio is designed around the specific structural and alignment challenges that consortium teams face in Horizon and other competitive funding programmes.</div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card-icon">🧭</div>
+        <h3>Structural rigour, not just text generation</h3>
+        <p>Callio separates project logic, work packages, and story building into distinct phases with controlled feedback between them — preventing structural fragility as complexity grows.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">🇪🇺</div>
+        <h3>Built from real EU Horizon experience</h3>
+        <p>The framework reflects patterns observed across multiple Horizon proposal processes — not generic grant advice, but the specific challenges consortium teams actually face.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">🤖</div>
+        <h3>AI as structured assistant, not black box</h3>
+        <p>AI-assisted workflows handle document analysis, scoring, and alignment checks. Your team stays in control of judgment, trade-offs, and final decisions throughout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="container">
+    <div class="waitlist-inner">
+      <div class="waitlist-left">
+        <div class="section-label">Early Access</div>
+        <div class="section-heading">Join the first cohort</div>
+        <div class="section-sub">We're onboarding a small group of teams to shape Callio's development alongside us.</div>
+        <div class="waitlist-benefit">
+          <div class="waitlist-benefit-dot"></div>
+          <p>Free call analysis for the first 20 signups — we'll process your funding call documents and deliver a structured summary</p>
+        </div>
+        <div class="waitlist-benefit">
+          <div class="waitlist-benefit-dot"></div>
+          <p>Direct input into features that matter most to your team</p>
+        </div>
+        <div class="waitlist-benefit">
+          <div class="waitlist-benefit-dot"></div>
+          <p>Early pricing locked in before public launch</p>
+        </div>
+      </div>
+      <div>
+        <div class="waitlist-box">
+          <h2>Request Early Access</h2>
+          <p class="offer">First <strong>20 signups</strong> receive a free Call Analysis — delivered as a structured summary ready for your team.</p>
+
+          <div class="form-error" id="formError"></div>
+
+          <form id="waitlistForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" name="email" required placeholder="you@organisation.com">
+            </div>
+            <div class="form-group">
+              <label for="organization">Organisation</label>
+              <input type="text" id="organization" name="organization" required placeholder="University, company, or institute">
+            </div>
+            <div class="form-group">
+              <label for="programs">Funding programmes you typically apply to <span class="optional">(optional)</span></label>
+              <textarea id="programs" name="programs" placeholder="e.g. Horizon Europe, ESA, Eurostars, national programmes..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Request Early Access</button>
+          </form>
+
+          <div class="form-success" id="formSuccess">
+            <div class="check">✓</div>
+            <h3>You're on the list!</h3>
+            <p>We'll be in touch soon to discuss your funding calls and proposal-development workflow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong style="color:rgba(255,255,255,0.6)">Callio</strong> is a service by <a href="https://sustainovate.com" target="_blank">Sustainovate AS</a></p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const errorEl = document.getElementById('formError');
+  errorEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  const data = {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    organization: document.getElementById('organization').value.trim(),
+    programs: document.getElementById('programs').value.trim(),
+    timestamp: new Date().toISOString()
+  };
+  try {
+    const res = await fetch('/api/waitlist.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      document.getElementById('waitlistForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.message || 'Something went wrong. Please try again.');
+    }
+  } catch (error) {
+    errorEl.textContent = error.message;
+    errorEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Request Early Access';
+  }
+});
+</script>
+
+</body>
+</html>
