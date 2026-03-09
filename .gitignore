@@ -4,6 +4,7 @@ Thumbs.db
 
 # Data (server-side only)
 data/waitlist.csv
+.env
 
 # Duplicate assets
 assets/Callio Image Mar 5, 2026 at 04_05_15 PM.png
