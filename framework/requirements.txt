@@ -1,0 +1,76 @@
+# Proposal Framework Dependencies
+# Essential packages for current implementation
+
+# Core PDF Processing
+PyPDF2>=3.0.0
+pycryptodome>=3.23.0
+
+# Document Processing (for LFA template analysis and Word export)
+python-docx>=1.1.0
+striprtf>=0.0.26
+PyYAML>=6.0.2
+python-dotenv>=1.0.1
+
+# Enhanced Document Processing with MarkItDown
+# Microsoft's MarkItDown for superior document processing
+# Supports: PDF, Word, Excel, PowerPoint, images, audio, HTML, and more
+# Provides structured Markdown output optimized for LLM processing
+markitdown[all]>=0.1.3
+
+# Version management and packaging utilities
+packaging>=21.0
+
+# Future Development Dependencies (optional)
+# Uncomment as needed when implementing Steps 3-5
+
+# Excel File Processing (for budget frameworks)
+# openpyxl>=3.1.0
+# pandas>=1.5.0
+
+# Data Analysis and Visualization (for reporting)
+# matplotlib>=3.6.0
+# seaborn>=0.12.0
+
+# Web Scraping and API (for enhanced features)
+# requests>=2.28.0
+# beautifulsoup4>=4.11.0
+
+# Python-Only Review Stack Dependencies
+# Text similarity and fuzzy matching
+rapidfuzz>=3.0.0
+scikit-learn>=1.3.0
+sentence-transformers>=2.2.0
+
+# Text analysis and readability
+textstat>=0.7.3
+pyspellchecker>=0.7.2
+language-tool-python>=2.7.1
+
+# NLP and language processing
+spacy>=3.7.0
+
+# BM25 retrieval for transcript evidence
+rank-bm25>=0.2.2
+
+# Graph analysis for dependency checking
+networkx>=3.0
+
+# Data validation and processing
+jsonschema>=4.17.0
+pydantic>=2.0.0
+
+# Utility packages
+python-dateutil>=2.8.0
+pytz>=2022.1
+
+# Template rendering and diffs
+jinja2>=3.1.0
+diff-match-patch>=20230430
+
+# Development and Testing (optional)
+# pytest>=7.0.0
+# black>=22.0.0
+# flake8>=5.0.0
+
+# Installation: pip install -r requirements.txt
+# Note: Current implementation only requires PDF and document processing packages

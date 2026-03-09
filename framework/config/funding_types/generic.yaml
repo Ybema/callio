@@ -1,0 +1,47 @@
+# Generic funding configuration for non-Horizon calls
+
+funding_info:
+  name: "Generic Funding Call"
+  type: "research_innovation"
+  region: "global"
+  language: "en"
+  currency: "EUR"
+
+project_config:
+  project_name: "ProjectName"
+  max_duration_months: 60
+  max_budget_eur: 50000000
+  min_partners: 1
+
+templates:
+  lfa: "lfa_template.docx"
+  work_packages: "Project_work_package_description_template.docx"
+  full_plan: "horizon_part_b_template.docx"
+
+review_modes:
+  llm_contextual:
+    enabled: true
+    default_mode: true
+    providers:
+      - name: "openai"
+        model: "gpt-4o-mini"
+        api_key_env: "OPENAI_API_KEY"
+  python_rules:
+    enabled: false
+    note: "LLM mode is the primary path for generic calls."
+
+outputs:
+  formats:
+    markdown:
+      enabled: true
+      language: "en"
+    json:
+      enabled: true
+      language: "en"
+    docx:
+      enabled: true
+      language: "en"
+  versioning:
+    enabled: true
+    snapshot_storage: "snapshots/generic/"
+    hash_algorithm: "sha256"

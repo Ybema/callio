@@ -1,0 +1,17 @@
+{
+  "criteria": {
+    "CA1": "llm",
+    "CA2": "llm", 
+    "CA3": "llm",
+    "CA4": "llm",
+    "CA5": "llm",
+    "CA6": "llm",
+    "LC1": "llm",
+    "LC2": "llm",
+    "LC3": "llm",
+    "LC4": "llm",
+    "CQ1": "llm",
+    "CQ2": "llm",
+    "CQ3": "llm"
+  }
+}

@@ -1,0 +1,41 @@
+# Secrets
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+horizon_env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated output (reproducible from source)
+output/
+snapshots/
+calls/*/
+!calls/_template/
+!calls/_template/**
+
+# Large binary documents (track in OneDrive, not git)
+# Uncomment these if you don't want to version input docs:
+# input/**/*.pdf
+# input/**/*.docx
+
+# Archive of old framework versions
+archive/

@@ -1,0 +1,187 @@
+# Work Package to Part B Mapping Configuration
+# This file defines how WP content is distributed across Part B tables
+# Used in Step 4 of the proposal development workflow
+
+# Part B Table Structure Mapping
+part_b_tables:
+  table_3_1b:
+    description: "Work Package Description (max ~1 page)"
+    content_sources:
+      - wp_header_info: "Partner information, duration, lead organization"
+      - wp_objectives: "Objectives and link to outcomes"
+      - wp_description: "Description of work (narrative)"
+      - wp_tasks: "Brief listing of tasks with minor descriptions"
+      - wp_dependencies: "Brief dependencies"
+    formatting_notes:
+      - "Maximum 1 page per WP"
+      - "Narrative format with brief task listings"
+      - "Include key dependencies"
+      - "Link objectives to LFA outcomes"
+
+  table_3_1c:
+    description: "Deliverables"
+    content_sources:
+      - wp_deliverables: "All WP deliverables with descriptions"
+    formatting_notes:
+      - "Complete deliverable list"
+      - "Include deliverable descriptions"
+      - "Maintain deliverable numbering"
+      - "Include delivery dates"
+
+  table_3_1d:
+    description: "Milestones"
+    content_sources:
+      - wp_milestones: "All WP milestones"
+    formatting_notes:
+      - "Complete milestone list"
+      - "Include milestone descriptions"
+      - "Include milestone dates"
+      - "Focus on decision points, not internal checks"
+
+  table_3_1e:
+    description: "Risks (1-2 lines each)"
+    content_sources:
+      - wp_risks: "All WP risks with mitigations"
+    formatting_notes:
+      - "Maximum 1-2 lines per risk"
+      - "Include risk description and mitigation"
+      - "Prioritize high-impact risks"
+      - "Consolidate similar risks across WPs"
+
+  table_3_1f:
+    description: "Resources - Personnel (numbers only)"
+    content_sources:
+      - wp_resources: "Personnel allocation by partner"
+    formatting_notes:
+      - "Person-months only"
+      - "By partner and WP"
+      - "No detailed descriptions"
+      - "Numbers only format"
+
+  table_3_1h:
+    description: "Resources - Other costs (numbers only)"
+    content_sources:
+      - wp_resources: "Equipment, travel, other costs"
+    formatting_notes:
+      - "Cost amounts only"
+      - "By partner and WP"
+      - "No detailed descriptions"
+      - "Numbers only format"
+
+# Content Extraction Rules
+extraction_rules:
+  # How to handle content from individual WP descriptions
+  source_priority:
+    - "Individual WP description documents (primary source)"
+    - "Part B document (secondary source for validation)"
+  
+  # Content condensation rules
+  condensation_strategy:
+    objectives:
+      - "Extract key objectives"
+      - "Link to LFA outcomes"
+      - "Remove internal process language"
+      - "Focus on measurable outcomes"
+    
+    description:
+      - "Condense to 1 page maximum"
+      - "Maintain technical accuracy"
+      - "Include key methodology"
+      - "Brief task listing only"
+    
+    deliverables:
+      - "Complete list with descriptions"
+      - "Maintain numbering system"
+      - "Include delivery dates"
+      - "Remove internal process details"
+    
+    milestones:
+      - "Focus on decision points"
+      - "Remove internal checkpoints"
+      - "Include key validation points"
+      - "Maximum 4-5 per WP"
+    
+    risks:
+      - "Consolidate similar risks"
+      - "Prioritize by impact"
+      - "1-2 lines maximum"
+      - "Include mitigation strategy"
+    
+    resources:
+      - "Numbers only"
+      - "By partner breakdown"
+      - "Remove detailed justifications"
+      - "Maintain cost accuracy"
+
+# Quality Assurance Rules
+quality_assurance:
+  content_validation:
+    - "Verify all WP content is captured"
+    - "Check for content gaps"
+    - "Validate numbering consistency"
+    - "Ensure LFA outcome links"
+  
+  formatting_validation:
+    - "Check page limits (1 page for 3.1b)"
+    - "Verify table format compliance"
+    - "Validate number formatting"
+    - "Check deliverable/milestone dates"
+  
+  consistency_validation:
+    - "Cross-check WP numbering"
+    - "Verify partner consistency"
+    - "Check timeline alignment"
+    - "Validate resource allocations"
+
+# Analysis Framework for Step 4
+step4_analysis:
+  # Same assessment criteria as Step 3, but source is Part B
+  assessment_dimensions:
+    - "LFA Integration Assessment"
+    - "EU Evaluation Criteria Assessment"
+    - "Practical Assessment Framework"
+    - "Cross-WP Integration Analysis"
+  
+  # Source identification
+  source_identification:
+    primary_source: "Part B document tables"
+    validation_source: "Individual WP descriptions"
+    analysis_focus: "Content distribution quality and Part B compliance"
+  
+  # Output format
+  output_format:
+    document_name: "step4_wp_analysis_v1_YYYYMMDD.md"
+    source_highlight: "Source: Part B document (vs. individual WP descriptions in Step 3)"
+    analysis_type: "Part B content distribution assessment"
+    comparison_note: "Comparison with Step 3 individual WP analysis"
+
+# Workflow Integration
+workflow_integration:
+  step3_to_step4_transition:
+    - "Complete Step 3 individual WP analysis"
+    - "Extract WP content to Part B format"
+    - "Validate content distribution"
+    - "Perform Step 4 Part B analysis"
+  
+  step4_to_step5_preparation:
+    - "Complete Part B content validation"
+    - "Identify remaining gaps"
+    - "Prepare for final proposal assembly"
+    - "Validate overall proposal coherence"
+
+# File Locations
+file_locations:
+  input_files:
+    part_b_document: "input/uploads/main_proposals/Project Part B.docx"
+    individual_wps: "input/uploads/work_packages/Project - WP*.docx"
+    lfa_document: "input/uploads/lfa_documents/Project_Logical_Framework.docx"
+  
+  output_files:
+    step4_analysis: "output/step4_wp_analysis_v1_YYYYMMDD.md"
+    step4_summary: "output/step4_wp_summary_v1_YYYYMMDD.md"
+    mapping_validation: "output/step4_mapping_validation.md"
+  
+  scripts:
+    step4_analysis_script: "scripts/step4/analyze_partb_content.py"
+    content_extraction_script: "scripts/step4/extract_partb_content.py"
+    mapping_validation_script: "scripts/step4/validate_mapping.py"

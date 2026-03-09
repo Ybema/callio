@@ -1,0 +1,128 @@
+# Generic Funding Type Configuration Template
+# Copy this file and customize for your specific funding program
+
+funding_info:
+  name: "Template Funding Program"
+  type: "research"  # research, innovation, tax_incentive, etc.
+  region: "global"
+  language: "en"
+  currency: "USD"
+
+# Document structure expected by this funding type
+document_structure:
+  phases:
+    lfa:
+      required: true
+      template_name: "generic_lfa_template.docx"
+      max_pages: 10
+      sections:
+        - "project_summary"
+        - "objectives"
+        - "outcomes"
+        - "outputs"
+        - "activities"
+        - "assumptions"
+        - "risks"
+    
+    work_packages:
+      required: true
+      template_name: "generic_wp_template.docx"
+      max_packages: 10
+      sections:
+        - "objectives"
+        - "description"
+        - "tasks"
+        - "deliverables"
+        - "milestones"
+        - "risks"
+        - "resources"
+    
+    full_plan:
+      required: true
+      template_name: "generic_plan_template.docx"
+      max_pages: 50
+      sections:
+        - "executive_summary"
+        - "project_description"
+        - "work_plan"
+        - "budget"
+        - "team"
+        - "impact"
+
+# Scoring system for this funding type
+scoring:
+  has_official_criteria: false  # Set to true if funding body provides specific criteria
+  official_criteria_source: ""  # URL or document name if available
+  
+  # Default scoring when no official criteria exist
+  default_criteria:
+    weights:
+      excellence: 40
+      impact: 35
+      implementation: 25
+    
+    scales:
+      type: "percentage"  # percentage, points_5, points_10
+      min: 0
+      max: 100
+      bands:
+        excellent: [90, 100]
+        good: [75, 89]
+        fair: [60, 74]
+        poor: [0, 59]
+
+# Review configuration
+review_modes:
+  python_rules:
+    enabled: true
+    rules:
+      - "alignment_check"
+      - "completeness_check"
+      - "consistency_check"
+      - "format_check"
+  
+  llm_contextual:
+    enabled: true
+    providers:
+      - name: "anthropic"
+        model: "claude-3-sonnet-20240229"
+        api_key_env: "ANTHROPIC_API_KEY"
+      - name: "openai"
+        model: "gpt-4"
+        api_key_env: "OPENAI_API_KEY"
+    
+    review_personas:
+      - "expert_reviewer"
+      - "funding_officer"
+      - "technical_assessor"
+
+# Output configuration
+outputs:
+  formats:
+    markdown:
+      enabled: true
+      template: "generic_review_template.md"
+    json:
+      enabled: true
+      schema: "review_schema_v1.json"
+    docx:
+      enabled: true
+      template: "generic_review_output.docx"
+  
+  versioning:
+    enabled: true
+    snapshot_storage: "snapshots/"
+    hash_algorithm: "sha256"
+
+# Validation rules
+validation:
+  required_sections: []  # List sections that must be present
+  max_word_count: {}     # Dict of section: max_words
+  required_keywords: []  # Keywords that should appear
+  forbidden_terms: []    # Terms that should not appear
+
+# Integration settings
+integration:
+  upstream_feedback: true  # Enable critical updates to flow back
+  cross_phase_validation: true
+  template_management: true

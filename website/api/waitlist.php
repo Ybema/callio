@@ -1,6 +1,9 @@
 <?php
-// Simple waitlist handler — stores submissions to a CSV file and sends email notification
+// Simple waitlist handler — stores submissions to CSV, notifies via Telegram + email
 header('Content-Type: application/json');
+
+// Load secrets
+require_once __DIR__ . '/.env.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -61,7 +64,22 @@ $line = sprintf(
 );
 file_put_contents($csv_file, $line, FILE_APPEND | LOCK_EX);
 
-// Send notification email (optional — configure your email)
+// Send Telegram notification
+$count = max(0, count(file($csv_file)) - 1); // subtract header
+$tg_message = "🎉 *Callio Waitlist Signup \\#{$count}*\n\n"
+    . "👤 *Name:* {$name}\n"
+    . "📧 *Email:* {$email}\n"
+    . "🏢 *Organisation:* {$org}\n"
+    . ($programs ? "📋 *Programmes:* {$programs}\n" : "")
+    . "🕐 {$timestamp}";
+
+@file_get_contents('https://api.telegram.org/bot' . TELEGRAM_BOT_TOKEN . '/sendMessage?' . http_build_query([
+    'chat_id' => TELEGRAM_CHAT_ID,
+    'text' => $tg_message,
+    'parse_mode' => 'Markdown',
+]));
+
+// Send notification email (backup)
 $to = 'ybema@sustainovate.com';
 $subject = "Callio Waitlist: $name ($org)";
 $body = "New waitlist signup:\n\nName: $name\nEmail: $email\nOrganisation: $org\nFunding programmes: $programs\nTime: $timestamp";

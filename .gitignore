@@ -7,3 +7,23 @@ data/waitlist.csv
 
 # Duplicate assets
 assets/Callio Image Mar 5, 2026 at 04_05_15 PM.png
+
+# Python
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.venv/
+**/horizon_env/
+*.pyc
+
+# Node / Next.js
+**/node_modules/
+**/.next/
+npm-debug.log*
+yarn-error.log*
+
+# Framework outputs and logs
+framework/calls/*/output/
+framework/logs/
+framework/snapshots/

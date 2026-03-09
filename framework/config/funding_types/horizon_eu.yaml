@@ -1,0 +1,77 @@
+# HORIZON EU Funding Configuration
+# Configuration settings only - criteria and scoring are in separate files
+
+# Basic funding information
+funding_info:
+  name: "HORIZON Europe"
+  type: "research_innovation"
+  region: "european_union"
+  language: "en"
+  currency: "EUR"
+  website: "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/programmes/horizon"
+
+# Project configuration
+project_config:
+  project_name: "ProjectName"  # Can be overridden per project
+  max_duration_months: 48
+  max_budget_eur: 15000000
+  min_partners: 3
+  required_countries: ["EU member states"]
+
+# Template references (structure defined by actual template files)
+templates:
+  lfa: "lfa_template.docx"
+  work_packages: "Project_work_package_description_template.docx"
+  full_plan: "horizon_part_b_template.docx"
+
+# Review engine configuration (LLM mode only)
+review_modes:
+  llm_contextual:
+    enabled: true
+    default_mode: true
+    providers:
+      - name: "anthropic"
+        model: "claude-3-sonnet-20240229"
+        api_key_env: "ANTHROPIC_API_KEY"
+      - name: "openai"
+        model: "gpt-4"
+        api_key_env: "OPENAI_API_KEY"
+  
+  # Python mode temporarily disabled for quality improvement
+  python_rules:
+    enabled: false
+    note: "Python mode disabled - focusing on LLM-based LFA methodology analysis"
+
+# Output configuration
+outputs:
+  formats:
+    markdown:
+      enabled: true
+      language: "en"
+    json:
+      enabled: true
+      language: "en"
+    docx:
+      enabled: true
+      language: "en"
+      template_style: "horizon_official"
+  
+  versioning:
+    enabled: true
+    snapshot_storage: "snapshots/horizon/"
+    hash_algorithm: "sha256"
+
+# Team/external output preferences
+team_config:
+  output_language: "en"
+  preferred_format: "docx"
+  include_scores: true
+  include_recommendations: true
+  executive_summary: true
+
+# File processing preferences
+processing:
+  auto_backup: true
+  preserve_originals: true
+  markdown_processing: true
+  content_validation: true

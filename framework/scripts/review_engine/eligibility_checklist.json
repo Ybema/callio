@@ -1,0 +1,30 @@
+{
+  "lfa_call_alignment": {
+    "goal_alignment": [
+      "LFA Goal directly addresses call's main objective",
+      "LFA Goal aligns with call's expected impact",
+      "LFA Goal covers call's target scope/geography"
+    ],
+    "outcome_alignment": [
+      "LFA Outcomes address call's expected outcomes",
+      "LFA Outcomes cover call's key impact areas",
+      "LFA Outcomes align with call's success criteria"
+    ],
+    "activity_alignment": [
+      "LFA Activities are within call's scope",
+      "LFA Activities address call's target beneficiaries",
+      "LFA Activities align with call's methodology requirements"
+    ],
+    "completeness": [
+      "All logical levels present (Goal, Purpose, Outcomes, Outputs, Activities)",
+      "Clear hierarchy from Goal to Activities",
+      "Logical flow between levels"
+    ]
+  },
+  "missing_elements": {
+    "call_objectives_not_addressed": [],
+    "call_impacts_not_covered": [],
+    "call_scope_elements_missing": [],
+    "logical_framework_gaps": []
+  }
+}

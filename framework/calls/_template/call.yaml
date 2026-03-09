@@ -1,0 +1,7 @@
+project_name: "My Proposal Project"
+call_id: "CALL-ID-PLACEHOLDER"
+funding_type: "generic"
+model: "gpt-4o-mini"
+phases:
+  - pre
+  - A

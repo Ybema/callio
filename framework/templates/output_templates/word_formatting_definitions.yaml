@@ -1,0 +1,130 @@
+# Word Document Formatting Definitions for Proposal Framework
+# Used by scripts/export_to_word.py for consistent document generation
+
+document_settings:
+  font_family: "Aptos"
+  font_size: 10
+  margin_inches: 1.0
+  page_orientation: "portrait"
+
+# Score-based color coding
+score_colors:
+  exceptional: # 90-100%
+    background: "D4E6F1"  # Light blue
+    text: "1B4F72"       # Dark blue
+  excellent: # 85-89%
+    background: "D5F4E6"  # Light green  
+    text: "196F3D"       # Dark green
+  good: # 75-84%
+    background: "FCF3CF"  # Light yellow
+    text: "B7950B"       # Dark yellow
+  fair: # 65-74%
+    background: "FADBD8"  # Light orange
+    text: "A93226"       # Dark orange
+  poor: # <65%
+    background: "FADBD8"  # Light red
+    text: "C0392B"       # Dark red
+
+# Table formatting rules
+tables:
+  wp_performance_matrix:
+    style: "Table Grid"
+    header_background: "2E86C1"
+    header_text_color: "FFFFFF"
+    header_bold: true
+    auto_fit: true
+    column_widths:
+      wp: 0.6           # Compact WP column
+      alignment_score: 0.8    # Compact score columns
+      lfa_integration: 0.8
+      eu_excellence: 0.8
+      eu_impact: 0.8
+      eu_implementation: 0.8
+      status: 0.7       # Compact status
+      priority_actions: 3.5   # Much wider for detailed actions
+    
+  cross_wp_matrix:
+    style: "Table Grid"
+    header_background: "28B463"
+    header_text_color: "FFFFFF"
+    header_bold: true
+    auto_fit: true
+    column_widths:
+      lfa_outcome: 1.5        # Compact outcome names
+      leading_wps: 1.0        # Compact WP lists
+      supporting_wps: 1.0
+      coverage_quality: 0.8   # Compact percentage
+      critical_gaps: 4.0      # Much wider for detailed gaps/questions
+
+# Text formatting styles
+text_styles:
+  title:
+    font_size: 16
+    bold: true
+    color: "2E86C1"
+  
+  section_header:
+    font_size: 14
+    bold: true
+    color: "1B4F72"
+  
+  subsection_header:
+    font_size: 12
+    bold: true
+    color: "5D6D7E"
+  
+  score_text:
+    bold: true
+    font_size: 11
+  
+  status_text:
+    bold: true
+    font_size: 10
+
+# Document structure templates
+placeholders:
+  # Main document placeholders
+  project_name: "{{PROJECT_NAME}}"
+  analysis_date: "{{ANALYSIS_DATE}}"
+  analysis_version: "{{ANALYSIS_VERSION}}"
+  overall_alignment: "{{OVERALL_ALIGNMENT}}"
+  overall_status: "{{OVERALL_STATUS}}"
+  
+  # WP Performance Matrix placeholders
+  wp_matrix_table: "{{WP_PERFORMANCE_MATRIX}}"
+  
+  # Cross-WP Matrix placeholders  
+  cross_wp_table: "{{CROSS_WP_ALIGNMENT_MATRIX}}"
+  
+  # Individual WP sections
+  wp_summaries: "{{WP_STRENGTH_WEAKNESS_SUMMARIES}}"
+  
+  # Action items
+  priority_actions: "{{IMMEDIATE_PRIORITY_ACTIONS}}"
+
+# Conditional formatting rules
+conditional_formatting:
+  score_ranges:
+    - range: [90, 100]
+      apply: "exceptional"
+    - range: [85, 89]
+      apply: "excellent"  
+    - range: [75, 84]
+      apply: "good"
+    - range: [65, 74]
+      apply: "fair"
+    - range: [0, 64]
+      apply: "poor"
+
+# Table cell formatting based on content
+cell_formatting:
+  status_cells:
+    "EXCEPTIONAL": "exceptional"
+    "EXCELLENT": "excellent" 
+    "GOOD": "good"
+    "FAIR": "fair"
+    "POOR": "poor"
+    
+  percentage_cells:
+    pattern: "\\d+%"
+    apply_score_colors: true

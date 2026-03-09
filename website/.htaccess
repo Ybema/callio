@@ -1,0 +1,9 @@
+# Protect data directory and env files
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^data/ - [F,L]
+</IfModule>
+
+<FilesMatch "\.env\.php$">
+  Require all denied
+</FilesMatch>
