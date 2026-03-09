@@ -39,7 +39,7 @@ graph LR
 - Organizes files for processing
 - Creates version-controlled snapshots
 
-**When to use:** Before starting any phase
+**When to use:** Before starting any phase. Re-run only if call documents change.
 
 ### **🔷 Phase A: Logic Framework Analysis**
 **What it does:** Establishes your proposal foundation
@@ -49,7 +49,7 @@ graph LR
 - Evaluates writing quality and clarity
 - **Cost:** ~$0.009-$0.295 per analysis (depending on AI model)
 
-**When to use:** When you have a draft Logic Framework
+**When to use:** When you have a draft Logic Framework. Run repeatedly during the LFA iteration loop (see below).
 
 ### **🔷 Phase B: Work Packages Analysis**
 **What it does:** Ensures detailed alignment
@@ -58,7 +58,7 @@ graph LR
 - Assesses objectives, tasks, deliverables, and milestones
 - Identifies gaps and inconsistencies
 
-**When to use:** When you have work package drafts
+**When to use:** When the LFA is solid and Phase A scores are acceptable.
 
 ### **🔷 Phase C: Full Proposal Analysis**
 **What it does:** Comprehensive final review
@@ -67,7 +67,116 @@ graph LR
 - Generates final recommendations
 - Creates comprehensive analysis report
 
-**When to use:** When you have a complete proposal draft
+**When to use:** When you have a complete proposal draft.
+
+---
+
+## 🔄 **LFA Iteration Loop (Phase A only)**
+
+The most important workflow during proposal development is the **LFA iteration loop** — editing the Logic Framework and running Phase A reviews repeatedly until the scores are acceptable. Phase B and C only come after the LFA is solid.
+
+```
+edit lfa_iteration_input.md  →  sync  →  Phase A reviews  →  new improvement_guide.md
+         ↑                                                              |
+         └──────────────── refine based on feedback ───────────────────┘
+```
+
+### **Setup (one-time per call)**
+
+```bash
+# Seed the working LFA file from the latest Phase A output
+python3 init_lfa_draft.py --call esa/responsible-fishing
+```
+
+This creates `input/lfa_documents/lfa_iteration_input.md` — a clean copy of the current structured LFA. **This is the only file you edit between Phase A runs.**
+
+> ⚠️ Do not edit `output/phase_a/lfa_restructured/lfa_structured.md` or `output/phase_a/improvement_guide.md` directly — they are regenerated on every Phase A run.
+
+### **Iteration cycle**
+
+1. Open `input/lfa_documents/lfa_iteration_input.md` in your editor
+2. Open `output/phase_a/improvement_guide.md` alongside it as read-only reference
+3. Edit the LFA sections based on the review feedback
+4. Run Phase A on your changes:
+
+```bash
+python3 sync_lfa_draft.py --call esa/responsible-fishing
+```
+
+Or post `sync` in the call's Slack channel (see [Slack integration](#-slack-integration) below).
+
+5. Check the updated scores in the new `improvement_guide.md`
+6. Repeat until scores are acceptable
+
+### **File roles**
+
+| File | Role | Edited by |
+|------|------|-----------|
+| `input/lfa_documents/lfa_iteration_input.md` | Working LFA — the file you edit | Moderator in Cursor |
+| `output/phase_a/lfa_restructured/lfa_structured.md` | Latest Phase A structured output | Auto-generated |
+| `output/phase_a/improvement_guide.md` | Section-by-section feedback with scores | Auto-generated |
+| `output/discussions/lfa_structured_archive_*.md` | Archived previous versions | Auto-generated |
+
+### **Scripts**
+
+| Script | Purpose |
+|--------|---------|
+| `init_lfa_draft.py --call <slug>` | Seed `lfa_iteration_input.md` from current Phase A output (run once, or after a major Phase A rerun) |
+| `sync_lfa_draft.py --call <slug>` | Push edits through Phase A — archives old output, copies input, runs reviews |
+
+---
+
+## 💬 **Slack Integration**
+
+Each call has a dedicated Slack channel for team collaboration and LLM-assisted discussion between Phase A runs.
+
+### **Channel naming**
+
+`#callio-{call-slug}` — e.g. `#callio-esa-responsible-fishing`
+
+One channel = one call = one bounded LFA context. Nina (the AI assistant) is scoped to that call only when active in the channel.
+
+### **Setup (one-time per channel)**
+
+1. Create a private Slack channel named `#callio-{call-slug}`
+2. Invite Nina to the channel
+3. Nina auto-posts a context summary and a pinned commands card
+
+### **Sync command**
+
+Post `sync` in the channel to push your `lfa_iteration_input.md` edits through Phase A. Nina runs `sync_lfa_draft.py`, streams the Phase A output, and posts the updated score summary back to the channel when done.
+
+### **Discussion session**
+
+For deeper LLM-assisted work on the LFA, start a discussion session:
+
+```
+start discussion
+```
+
+Nina loads the full project context (structured LFA, both review files, call context, team notes) and enters an interactive session. Commands during a session:
+
+| Command | Action |
+|---------|--------|
+| `/draft` | Generate a full improved LFA draft based on discussion so far |
+| `/diff` | Show what changed vs the baseline LFA |
+| `/finalize` | Produce `improved_lfa.md` + `.docx` + transcript + change summary |
+| `/save` | Checkpoint the session |
+| `/show lfa\|structural\|alignment\|call\|team` | Display a loaded context section |
+
+On `/finalize`, the improved LFA is placed in `input/lfa_documents/` automatically so the next Phase A run picks it up.
+
+### **Team notes**
+
+Paste collected team feedback directly in the channel before starting a session. Nina collects it into `input/team_notes.md` so it becomes part of the LLM context.
+
+### **Editing workflow with Slack**
+
+1. Edit `lfa_iteration_input.md` in Cursor (improvement_guide.md open alongside as reference)
+2. Post `sync` in the Slack channel
+3. Nina runs Phase A, posts updated scores to the channel
+4. Optionally: post `start discussion` for LLM-assisted rewrite of specific sections
+5. Repeat
 
 ---
 

@@ -4,6 +4,28 @@ Lightweight record of key architectural and operational decisions.
 
 ---
 
+### 2026-03-09 — Introduce LFA iteration loop and Slack integration
+
+**Context:** The existing iteration cycle required manually editing the LFA `.docx`, converting it, and re-running Phase A. There was no structured mechanism for the moderator to edit the LFA between runs without overwriting Phase A outputs, and no team-facing interface for discussion or feedback collection.
+
+**Decision:** Introduce two new concepts:
+
+1. **LFA iteration loop** — a single editable file `input/lfa_documents/lfa_iteration_input.md` that the moderator edits in Cursor between Phase A runs. Phase A's review step already prefers `output/phase_a/lfa_restructured/lfa_structured.md` when it exists; `sync_lfa_draft.py` archives the old version, copies the draft there, and re-runs Phase A. No `.docx` round-trip needed after the first run.
+
+2. **Slack integration** — dedicated `#callio-{call-slug}` channels. Nina (AI assistant, `groupPolicy: open`) responds to all messages. `sync` posts `sync_lfa_draft.py` output back to the channel. `start discussion` loads the full call context and opens an interactive LLM-assisted session (backed by `run_discussion.py`).
+
+**Key design principles:**
+- `lfa_iteration_input.md` is always input; Phase A outputs are always regenerated. No file serves both roles.
+- The Slack file is a read-only team view; source of truth is the filesystem.
+- `sync_lfa_draft.py` archives before overwriting, so every version of `lfa_structured.md` is recoverable from `output/discussions/lfa_structured_archive_*.md`.
+- Phase B and C are only run once the LFA is solid (Phase A scores acceptable). The iteration loop is Phase A only.
+
+**Files added:** `init_lfa_draft.py`, `sync_lfa_draft.py`, `templates/discussion/system_prompt.md`, `scripts/discussion_engine.py`, `run_discussion.py`
+
+**Files updated:** `README.md`, `docs/architecture.md`, `docs/decisions.md`, `docs/deployment.md`
+
+---
+
 ### 2026-03-09 — Add smart context sync for pipeline phases
 
 **Context:** Teams add new call/strategy context throughout iterative proposal work, but had to manually decide whether to run pre-phase before Phase A/B/C. Re-running pre-phase also reprocessed unchanged files and repeated LLM synthesis work.

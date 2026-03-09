@@ -128,6 +128,41 @@ Outputs are written to `calls/my-call/output/phase_a/review_results/`.
 
 Phase A processing logs include `template_mapping` diagnostics for call-specific LFA files (matched/unmatched template sections). Pre-phase only converts static context documents and does not touch LFA or WP files.
 
+## LFA Iteration Loop Setup
+
+After the first Phase A run, seed the working LFA file:
+
+```bash
+python3 init_lfa_draft.py --call <source>/<call>
+# e.g. python3 init_lfa_draft.py --call esa/responsible-fishing
+```
+
+This creates `calls/<call>/input/lfa_documents/lfa_iteration_input.md` from the current `lfa_structured.md`. This is the only file the moderator edits between Phase A runs.
+
+To push edits through Phase A:
+
+```bash
+python3 sync_lfa_draft.py --call <source>/<call>
+```
+
+Or post `sync` in the call's Slack channel.
+
+> Re-run `init_lfa_draft.py --force` only if a major Phase A run produces a structurally different LFA and you want to reset the working file from scratch.
+
+## Slack Channel Setup (per call)
+
+1. Create a private Slack channel named `#callio-{call-slug}` (e.g. `#callio-esa-responsible-fishing`)
+2. Invite the Nina bot to the channel
+3. Nina auto-posts a context summary and pins a commands card
+
+Required Slack bot OAuth scopes:
+- `channels:read`, `groups:read` — list and discover channels
+- `groups:history`, `channels:history` — read channel messages
+- `chat:write` — post messages
+- `files:read`, `files:write` — upload/download improvement guide
+- `pins:write` — pin commands card on setup
+- `app_mentions:read` — receive mentions (used for non-open channels)
+
 ## Warnings
 
 | Warning | Cause | Impact |
